@@ -72,7 +72,7 @@ void restrict(double ***phi, double ***f, double ***aux, int n, int level, MPI_C
         // recv colbuf from rank 3
         MPI_Irecv(colbuf, n, MPI_DOUBLE, 3, 1, comm, &reqin2);
         // send to rank0 the corner value
-        pointbuf = f[level][1][1];
+        pointbuf = aux[level][1][1];
         MPI_Isend(&pointbuf, 1, MPI_DOUBLE, 0, 1, comm, &reqout1);
     }
     else
