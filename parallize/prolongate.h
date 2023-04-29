@@ -42,13 +42,13 @@ void prolongate(double ***phi, double ***aux, int n, int level, MPI_Comm comm)
     }
     else
     {
-        jr = 0;
-        jc = n_coarse - 1;
+        jr = n_coarse - 1;
+        jc = 0;
     }
     // perform full weight prolongation for interior point
     for (int i = 0; i < n_coarse; i++)
     {
-        for (int j = 1; j < n_coarse; j++)
+        for (int j = 0; j < n_coarse; j++)
         {
             if (i == jr || j == jc)
             {

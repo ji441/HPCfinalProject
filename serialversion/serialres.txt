@@ -1,0 +1,1 @@
+with 4097 nodes,original error is 4095.000000,after 1 multicycles with 10 sweeps, the error is 146.085602

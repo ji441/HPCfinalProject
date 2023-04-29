@@ -10,7 +10,6 @@
 using namespace std;
 void restrict(double ***phi, double ***f, double ***aux, int n, int level, MPI_Comm comm)
 {
-    double h2 = pow(1.0 / ((double)n - 1.0), 2.0);
     // define MPI related things
     int rank;
     MPI_Comm_rank(comm, &rank);
@@ -122,17 +121,15 @@ void restrict(double ***phi, double ***f, double ***aux, int n, int level, MPI_C
             // update upper doundary
             f[level_coarse][n_coarse - 1][i] =
                 rowbuf[i_fine - 1] * (1.0 / 16.0) + rowbuf[i_fine] * (1.0 / 8.0) + rowbuf[i_fine + 1] * (1.0 / 16.0) +
-                aux[level][n_coarse - 1][i_fine - 1] * (1.0 / 8.0) + aux[level][n_coarse - 1][i_fine] * (1.0 / 4.0) +
-                aux[level][n_coarse - 1][i_fine + 1] * (1.0 / 8.0) +
-                aux[level][n_coarse - 2][i_fine - 1] * (1.0 / 16.0) + aux[level][n_coarse - 2][i_fine] * (1.0 / 8.0) +
-                aux[level][n_coarse - 2][i_fine + 1] * (1.0 / 16.0);
+                aux[level][n - 1][i_fine - 1] * (1.0 / 8.0) + aux[level][n - 1][i_fine] * (1.0 / 4.0) +
+                aux[level][n - 1][i_fine + 1] * (1.0 / 8.0) + aux[level][n - 2][i_fine - 1] * (1.0 / 16.0) +
+                aux[level][n - 2][i_fine] * (1.0 / 8.0) + aux[level][n - 2][i_fine + 1] * (1.0 / 16.0);
             // update right boundary
             f[level_coarse][i][n_coarse - 1] =
                 colbuf[i_fine - 1] * (1.0 / 16.0) + colbuf[i_fine] * (1.0 / 8.0) + colbuf[i_fine + 1] * (1.0 / 16.0) +
-                aux[level][i_fine - 1][n_coarse - 1] * (1.0 / 8.0) + aux[level][i_fine][n_coarse - 1] * (1.0 / 4.0) +
-                aux[level][i_fine + 1][n_coarse - 1] * (1.0 / 8.0) +
-                aux[level][i_fine - 1][n_coarse - 2] * (1.0 / 16.0) + aux[level][i_fine][n_coarse - 2] * (1.0 / 8.0) +
-                aux[level][i_fine + 1][n_coarse - 2] * (1.0 / 16.0);
+                aux[level][i_fine - 1][n - 1] * (1.0 / 8.0) + aux[level][i_fine][n - 1] * (1.0 / 4.0) +
+                aux[level][i_fine + 1][n - 1] * (1.0 / 8.0) + aux[level][i_fine - 1][n - 2] * (1.0 / 16.0) +
+                aux[level][i_fine][n - 2] * (1.0 / 8.0) + aux[level][i_fine + 1][n - 2] * (1.0 / 16.0);
         }
         // update the rightup corner value, which is also the center value in all
         f[level_coarse][n_coarse - 1][n_coarse - 1] =
@@ -188,7 +185,7 @@ void restrict(double ***phi, double ***f, double ***aux, int n, int level, MPI_C
             int k_fine = k * 2;
             // update bottom row
             f[level_coarse][0][k] = rowbuf[k_fine - 1] * (1.0 / 16.0) + rowbuf[k_fine] * (1. / 8.) +
-                                    rowbuf[k_fine] * (1. / 16.) + aux[level][0][k_fine - 1] * (1. / 8.) +
+                                    rowbuf[k_fine + 1] * (1. / 16.) + aux[level][0][k_fine - 1] * (1. / 8.) +
                                     aux[level][0][k_fine] * (1. / 4.) + aux[level][0][k_fine + 1] * (1. / 8.) +
                                     aux[level][1][k_fine - 1] * (1. / 16.) + aux[level][1][k_fine] * (1. / 8.) +
                                     aux[level][1][k_fine + 1] * (1. / 16.);
