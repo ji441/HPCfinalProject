@@ -11,6 +11,6 @@
 #SBATCH --mail-user=qj2030@nyu.edu
 
 module purge 
-module load  amber/openmpi/intel/20.06 
+module load  gcc/10.2.0
 
-./serialres 4097
+./serialres 4097 5

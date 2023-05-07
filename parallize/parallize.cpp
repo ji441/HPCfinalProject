@@ -80,19 +80,25 @@ int main(int argc, char *argv[])
     // compute initial value of the residual before any smoothing
     residual_0 = compute_residual(phi[0], aux[0], f[0], n, comm);
     MPI_Barrier(comm);
+    // timer begin
+    double tt = MPI_Wtime();
     for (i_mgcycles = 1; i_mgcycles <= n_mgcycles; i_mgcycles++)
     {
         multigrid_cycle(phi, f, aux, n, n_sweeps, n_levels, 0, comm);
         MPI_Barrier(comm);
     }
+
     // compute residual to report
     residual = compute_residual(phi[0], aux[0], f[0], n, comm);
+    MPI_Barrier(comm);
+    double elapsed = MPI_Wtime() - tt;
     deallocate_arrays(phi, f, aux, n, n_levels);
     // print
     if (rank == 0)
     {
-        printf("with %d nodes,original error is %f,after %d multicycles with %d sweeps, the error is %f\n", n_nodes,
-               residual_0, n_mgcycles, n_sweeps, residual);
+        printf("with %d nodes,original error is %f,after %d multicycles with %d sweeps, the error is %f\n,time spent "
+               "is : %f seconds",
+               n_nodes, residual_0, n_mgcycles, n_sweeps, residual, elapsed);
     }
     MPI_Finalize();
 }

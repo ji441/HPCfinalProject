@@ -1,1 +1,2 @@
-with 4097 nodes,original error is 4095.000000,after 3 multicycles with 10 sweeps, the error is 9.775874
+with 4097 nodes,original error is 4095.000000,after 5 multicycles with 10 sweeps, the error is 0.202777
+,time spent is : 3.285072 seconds

@@ -318,7 +318,7 @@ int main(int argc, char *argv[])
     // initialize the problem at the arrays
     initialize_solution(phi[FINE_MESH], f[FINE_MESH], n_nodes);
     // compute the initial value of the residual before any smoothing
-    residual_0 = compute_residual(phi[FINE_MESH], f[FINE_MESH], aux[FINE_MESH], n_nodes);
+    residual_0 = compute_residual(phi[0], f[0], aux[0], n_nodes);
     // begin count time
     Timer t;
     t.tic();
