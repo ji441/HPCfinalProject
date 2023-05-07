@@ -89,7 +89,7 @@ double compute_residual(double **phi, double **residual, double **f, int n, MPI_
             // the upper boundary index [n-1][k]
             double res2 =
                 f[n - 1][k] +
-                (phi[n - 1][k - 1] + phi[n - 2][k] + phi[n - 1][k + 1] + rowbuf[k] - 4.0 * phi[k][n - 1]) / h2;
+                (phi[n - 1][k - 1] + phi[n - 2][k] + phi[n - 1][k + 1] + rowbuf[k] - 4.0 * phi[n - 1][k]) / h2;
             // update residual
             residual[k][n - 1] = res1;
             residual[n - 1][k] = res2;

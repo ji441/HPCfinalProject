@@ -51,7 +51,7 @@ int allocate_arrays(double ****phi, double ****f, double ****aux, int n_nodes)
     // compute the number of levels of coarsen we want to perform
     while (coarsen)
     { // make sure each level has odd number of nodes
-        if ((nodes - 1) % 2 == 0 && (nodes - 1) / 2 + 1 >= 5)
+        if ((nodes - 1) % 2 == 0 && (nodes - 1) / 2 + 1 >= 11)
         {
             nodes = (nodes - 1) / 2 + 1;
             n_levels++;

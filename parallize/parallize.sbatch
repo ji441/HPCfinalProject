@@ -13,4 +13,4 @@
 module purge 
 module load  amber/openmpi/intel/20.06 
 
-mpiexec ./parallize 4097 2
+mpiexec ./parallize 4097 3
