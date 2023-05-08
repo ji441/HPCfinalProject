@@ -51,7 +51,7 @@ int allocate_arrays(double ****phi, double ****f, double ****aux, int n_nodes)
     // compute the number of levels of coarsen we want to perform
     while (coarsen)
     { // make sure each level has odd number of nodes
-        if ((nodes - 1) % 2 == 0 && (nodes - 1) / 2 + 1 >= 11)
+        if ((nodes - 1) % 2 == 0 && (nodes - 1) / 2 + 1 >= 9)
         {
             nodes = (nodes - 1) / 2 + 1;
             n_levels++;
@@ -127,13 +127,13 @@ void initialize_solution(double **phi, double **f, int n_nodes)
             if (i == 0 || j == 0 || i == n_nodes - 1 || j == n_nodes - 1)
             {
                 // boundarycondition goes here
-                phi[i][j] = 0;
+                phi[i][j] = 0.;
             }
             else
             {
                 // initial guess and value of f goes here
-                phi[i][j] = 0;
-                f[i][j] = 1;
+                phi[i][j] = 0.;
+                f[i][j] = 1.;
             }
         }
     }
@@ -167,7 +167,7 @@ double compute_residual(double **phi, double **f, double **residual, int n_nodes
 {
     // compute the residual which is f-A*phi,so we can use it as the f in next level
     // and return the 2 norm
-    double norm;
+    double norm = 0;
     double h2 = pow(1.0 / ((double)n_nodes - 1.0), 2.0);
     for (int i = 1; i < n_nodes - 1; i++)
     {

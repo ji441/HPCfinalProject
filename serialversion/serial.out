@@ -1,3 +1,3 @@
 Solution initialized.
-with 4097 nodes,original error is 4095.000000,after 5 multicycles with 10 sweeps, the error is 256.968317
-time spent: 18.379562
+with 4097 nodes,original error is 4095.000000,after 5 multicycles with 10 sweeps, the error is 0.202777
+time spent: 8.989103
